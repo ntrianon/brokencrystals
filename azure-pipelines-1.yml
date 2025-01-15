@@ -1,0 +1,47 @@
+trigger: none
+
+
+
+ 
+
+pool:
+
+  vmImage: "ubuntu-latest"
+
+ 
+
+jobs:
+
+- job: build
+
+  displayName: 'Initiate DAST scan'
+
+ 
+
+  steps:
+
+  # Use PowerShell to do the heavy lifting
+
+  - powershell: |
+     sudo chmod a+rw -R ./
+     docker pull checkmarx/dast:latest
+
+     docker run -e CX_APIKEY=$(CANARY_API_KEY) -v "/home/vsts/work/1/s:/dast_home" checkmarx/dast:latest web --environment-id="99f10aac-6a73-49a3-81b1-0adae9a158fc" --config="/dast_home/DAST-AZURE/dast-config/zap_config.yaml" --base-url=https://deu.ast.checkmarx.net/ --output=/dast_home/DAST-AZURE/test_output --timeout=10000 --update-interval=10 --jvm-properties=-Xmx3G --log-level=info --verbose --retry=3 --retry-delay=20
+
+     sudo chown -R vsts:docker test_output
+
+    displayName: 'Run CxOne DAST via PowerShell'
+
+ 
+
+  # Publish the contents of the output directory as artifacts
+
+  - task: PublishPipelineArtifact@1
+
+    displayName: 'Publish CxOne DAST Artifacts'
+
+    inputs:
+
+      targetPath:  '$(Build.SourcesDirectory)/DAST-AZURE/test_output'
+
+      artifact: 'CxOne DAST Artifacts'
