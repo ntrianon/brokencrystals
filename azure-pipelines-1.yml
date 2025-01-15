@@ -26,7 +26,7 @@ jobs:
      sudo chmod a+rw -R ./
      docker pull checkmarx/dast:latest
 
-     docker run -e CX_APIKEY=$(CANARY_API_KEY) -v "/home/vsts/work/1/s:/dast_home" checkmarx/dast:latest web --environment-id="99f10aac-6a73-49a3-81b1-0adae9a158fc" --config="/dast_home/DAST-AZURE/dast-config/zap_config.yaml" --base-url=https://deu.ast.checkmarx.net/ --output=/dast_home/DAST-AZURE/test_output --timeout=10000 --update-interval=10 --jvm-properties=-Xmx3G --log-level=info --verbose --retry=3 --retry-delay=20
+     docker run -e CX_APIKEY=$"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjYjkzNmJjZC05NWJkLTQ3ZDYtYjZmNC1mMTExNWQyODAyMWMifQ.eyJpYXQiOjE3MTY4NDA3NzksImp0aSI6IjMzOGViMjMwLWU0ODQtNGI1OC1iMzg2LWIwYzgzM2RkOGFiYSIsImlzcyI6Imh0dHBzOi8vaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvbmZyX2x1Z2FwZWwtYXN0IiwiYXVkIjoiaHR0cHM6Ly9pYW0uY2hlY2ttYXJ4Lm5ldC9hdXRoL3JlYWxtcy9uZnJfbHVnYXBlbC1hc3QiLCJzdWIiOiJhMDQyNjdkZS1kNTNkLTQyYjctYjg0Zi0xOGNmMTkyMTlkOWIiLCJ0eXAiOiJPZmZsaW5lIiwiYXpwIjoiYXN0LWFwcCIsInNlc3Npb25fc3RhdGUiOiJlMWJlYWJlNy1jNDg3LTQyZWQtYTAyNi0yZDc1ZTRlZGU3MTIiLCJzY29wZSI6IiBvZmZsaW5lX2FjY2VzcyIsInNpZCI6ImUxYmVhYmU3LWM0ODctNDJlZC1hMDI2LTJkNzVlNGVkZTcxMiJ9.D-lRPcRnQy6X2T4h36pYi0mZZ0Uj7sZdvFKSU6RqhEc" -v "/home/vsts/work/1/s:/dast_home" checkmarx/dast:latest web --environment-id="99f10aac-6a73-49a3-81b1-0adae9a158fc" --config="/dast_home/DAST-AZURE/dast-config/zap_config.yaml" --base-url=https://ast.checkmarx.net/ --output=/dast_home/DAST-AZURE/test_output --timeout=10000 --update-interval=10 --jvm-properties=-Xmx3G --log-level=info --verbose --retry=3 --retry-delay=20
 
      sudo chown -R vsts:docker test_output
 
